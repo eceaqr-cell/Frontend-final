@@ -1,11 +1,14 @@
 
-import IntegrationCardDemo from "@/components/shadcn-space/card/card-19";
+import { Wishlist1 } from "@/components/wishlist1";
+import { div } from "motion/react-client";
 import Image from "next/image";
 
 export default function Home() {
   return (
 
-    <IntegrationCardDemo />
+    <div className="container mx-auto">
+      <Wishlist1/>
+    </div>
     
   );
 }
