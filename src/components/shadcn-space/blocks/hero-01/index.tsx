@@ -5,7 +5,7 @@ import BrandSlider, { BrandList } from "@/components/shadcn-space/blocks/hero-01
 import type { AvatarList } from "@/components/shadcn-space/blocks/hero-01/hero";
 import Link from "next/link";
 
-export default function AgencyHeroSection() {
+export default function Navbar() {
   const avatarList: AvatarList[] = [
     {
       image: "https://images.shadcnspace.com/assets/profiles/user-1.jpg",

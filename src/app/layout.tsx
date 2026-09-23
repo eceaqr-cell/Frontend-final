@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/shadcn-space/blocks/navbar-01/navbar";
 import Footer from "@/components/shadcn-space/blocks/footer-01/footer";
-import AgencyHeroSection from "@/components/shadcn-space/blocks/hero-01";
+import Navbar from "@/components/shadcn-space/blocks/hero-01";
+
 
 
 const geistSans = Geist({
@@ -28,7 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <AgencyHeroSection/>
+        <Navbar/>
         {children}
          <Footer />
         </body>
