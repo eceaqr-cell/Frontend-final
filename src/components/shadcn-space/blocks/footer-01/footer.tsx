@@ -56,22 +56,22 @@ type FooterData = {
 
 const footerSections: FooterData[] = [
   {
-    title: "Sitemap",
+    title: "Shop",
     links: [
       {
-        title: "Contact us",
+        title: "About us ",
         href: "#",
       },
       {
-        title: "About us",
+        title: "Categories",
         href: "#",
       },
       {
-        title: "Work",
+        title: "Track Order",
         href: "#",
       },
       {
-        title: "Services",
+        title: "FAQs",
         href: "#",
       },
       {
@@ -83,10 +83,7 @@ const footerSections: FooterData[] = [
   {
     title: "Other Pages",
     links: [
-      {
-        title: "Error 404",
-        href: "#",
-      },
+     
       {
         title: "Terms & Conditions",
         href: "#",
@@ -113,8 +110,7 @@ const Footer = () => {
                 </a>
 
                 <p className="text-base font-normal text-muted-foreground">
-                  Empowering businesses with innovative solutions. Let's create
-                  something amazing together.
+                 Your trusted online shop for quality products — fast shipping, secure checkout, every time
                 </p>
 
                 {/* social links */}
@@ -179,7 +175,7 @@ const Footer = () => {
                 <ul className="flex flex-col gap-3">
                   <li>
                     <p className="text-base font-normal text-muted-foreground">
-                      81 Rivington Street London EC2A 3AY
+                      81 Phnom Phenh
                     </p>
                   </li>
                   <li>
@@ -187,7 +183,7 @@ const Footer = () => {
                       href="mailto:contact@example.com"
                       className="text-base font-normal text-muted-foreground hover:text-foreground"
                     >
-                      hello@shadcnspace.com
+                     hello@nexusecom.com
                     </a>
                   </li>
                   <li>
@@ -195,7 +191,7 @@ const Footer = () => {
                       href="tel:+01051923556"
                       className="text-base font-normal text-muted-foreground hover:text-foreground"
                     >
-                      0105 192 3556
+                      0714 097 399
                     </a>
                   </li>
                 </ul>
@@ -204,7 +200,7 @@ const Footer = () => {
           </div>
           <Separator orientation="horizontal" />
           <p className="text-sm font-normal text-muted-foreground text-center animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-100 ease-in-out fill-mode-both">
-            ©2026 Shadcn Space. All Rights Reserved
+            ©2026 NEXUS. All Rights Reserved
           </p>
         </div>
       </div>
