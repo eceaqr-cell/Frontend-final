@@ -1,6 +1,9 @@
 import { Wishlist1 } from "@/components/wishlist1";
 import HeroSection from "@/components/shadcn-space/blocks/hero-01/hero";
 import BrandList from "@/components/shadcn-space/blocks/hero-01/brand-slider";
+import ProductListing from "@/components/shadcn-space/blocks/product-listing-01";
+import Services from "@/components/shadcn-space/blocks/services-01/services";
+import Categories from "@/components/shadcn-space/blocks/services-01/services";
 
 const avatarList = [
   { image: "https://randomuser.me/api/portraits/men/1.jpg" },
@@ -23,7 +26,9 @@ export default function Home() {
     <div className="container mx-auto">
       <HeroSection avatarList={avatarList} />
       <BrandList brandList={brandList} />
-      <Wishlist1 />
+      <ProductListing/>
+      <Services/>
+      
     </div>
   );
 }

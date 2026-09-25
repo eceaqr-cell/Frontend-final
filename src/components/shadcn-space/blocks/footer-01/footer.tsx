@@ -60,7 +60,7 @@ const footerSections: FooterData[] = [
     links: [
       {
         title: "About us ",
-        href: "#",
+        href: "/about",
       },
       {
         title: "Categories",

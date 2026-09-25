@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 const navigationData = [
-  { title: "Home", href: "/", isActive: true },
+  { title: "Home", href: "/" },
   { title: "Products", href: "/products" },
   { title: "About us", href: "/about" },
   { title: "Contact", href: "/contact" },

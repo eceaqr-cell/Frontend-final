@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { usePathname } from "next/navigation";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetClose } from "@/components/ui/sheet";
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
@@ -15,7 +16,6 @@ import Link from "next/link";
 export type NavigationSection = {
   title: string;
   href: string;
-  isActive?: boolean;
 };
 
 type HeaderProps = {
@@ -48,6 +48,7 @@ const LoginButton = ({ className }: { className?: string }) => (
 );
 
 const Header = ({ navigationData, className }: HeaderProps) => {
+  const pathname = usePathname();
   const [sticky, setSticky] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -99,16 +100,22 @@ const Header = ({ navigationData, className }: HeaderProps) => {
         <div>
           <NavigationMenu className="max-lg:hidden bg-muted p-0.5 rounded-full">
             <NavigationMenuList className="flex gap-0">
-              {navigationData.map((navItem) => (
-                <NavigationMenuItem key={navItem.title}>
-                  <NavigationMenuLink
-                    href={navItem.href}
-                    className={cn("px-2 lg:px-4 py-2 text-sm font-medium rounded-full text-muted-foreground hover:text-foreground hover:bg-background outline outline-transparent hover:outline-border hover:shadow-xs transition tracking-normal", navItem.isActive ? "bg-background text-foreground" : "")}
-                  >
-                    {navItem.title}
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              ))}
+              {navigationData.map((navItem) => {
+                const isActive = pathname === navItem.href;
+                return (
+                  <NavigationMenuItem key={navItem.title}>
+                    <NavigationMenuLink
+                      href={navItem.href}
+                      className={cn(
+                        "px-2 lg:px-4 py-2 text-sm font-medium rounded-full text-muted-foreground hover:text-foreground hover:bg-background outline outline-transparent hover:outline-border hover:shadow-xs transition tracking-normal",
+                        isActive ? "bg-background text-foreground" : "",
+                      )}
+                    >
+                      {navItem.title}
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                );
+              })}
             </NavigationMenuList>
           </NavigationMenu>
         </div>
@@ -151,29 +158,32 @@ const Header = ({ navigationData, className }: HeaderProps) => {
                       className="items-start flex-none"
                     >
                       <NavigationMenuList className="flex flex-col items-start gap-3">
-                        {navigationData.map((item) => (
-                          <NavigationMenuItem key={item.title}>
-                            <NavigationMenuLink
-                              href={item.href}
-                              className={cn(
-                                "group/nav flex items-center text-2xl font-semibold tracking-tight transition-all p-0 hover:bg-transparent focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-transparent",
-                                item.isActive
-                                  ? "text-primary"
-                                  : "text-muted-foreground hover:text-foreground hover:translate-x-2",
-                              )}
-                            >
-                              <div
+                        {navigationData.map((item) => {
+                          const isActive = pathname === item.href;
+                          return (
+                            <NavigationMenuItem key={item.title}>
+                              <NavigationMenuLink
+                                href={item.href}
                                 className={cn(
-                                  "h-0.5 bg-primary transition-all duration-300 overflow-hidden",
-                                  item.isActive
-                                    ? "w-4 mr-2 opacity-100"
-                                    : "w-0 opacity-0 group-hover/nav:w-4 group-hover/nav:mr-2 group-hover/nav:opacity-100",
+                                  "group/nav flex items-center text-2xl font-semibold tracking-tight transition-all p-0 hover:bg-transparent focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-transparent",
+                                  isActive
+                                    ? "text-primary"
+                                    : "text-muted-foreground hover:text-foreground hover:translate-x-2",
                                 )}
-                              />
-                              {item.title}
-                            </NavigationMenuLink>
-                          </NavigationMenuItem>
-                        ))}
+                              >
+                                <div
+                                  className={cn(
+                                    "h-0.5 bg-primary transition-all duration-300 overflow-hidden",
+                                    isActive
+                                      ? "w-4 mr-2 opacity-100"
+                                      : "w-0 opacity-0 group-hover/nav:w-4 group-hover/nav:mr-2 group-hover/nav:opacity-100",
+                                  )}
+                                />
+                                {item.title}
+                              </NavigationMenuLink>
+                            </NavigationMenuItem>
+                          );
+                        })}
                       </NavigationMenuList>
                     </NavigationMenu>
 
