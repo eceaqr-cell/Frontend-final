@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Footer from "@/components/shadcn-space/blocks/footer-01/footer";
-import Header from "@/components/shadcn-space/blocks/hero-01/header";
+import { CartProvider } from "@/context/cart-context";
+import { WishlistProvider } from "@/context/wishlist-context";
+import LayoutWrapper from "@/components/layout-wrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,23 +20,18 @@ export const metadata: Metadata = {
   description: "Your trusted online shop for quality products",
 };
 
-const navigationData = [
-  { title: "Home", href: "/" },
-  { title: "Products", href: "/products" },
-  { title: "About us", href: "/about" },
-  { title: "Contact", href: "/contact" },
-];
-
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Header navigationData={navigationData} />
-        {children}
-        <Footer />
+        <CartProvider>
+          <WishlistProvider>
+            <LayoutWrapper>{children}</LayoutWrapper>
+          </WishlistProvider>
+        </CartProvider>
       </body>
     </html>
   );
