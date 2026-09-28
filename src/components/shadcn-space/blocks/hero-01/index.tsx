@@ -78,7 +78,7 @@ export default function Navbar() {
      {
       image: "https://i.pinimg.com/1200x/2b/a1/4a/2ba14a9cc9390461665c29b55c692090.jpg",
       lightimg: "https://i.pinimg.com/1200x/2b/a1/4a/2ba14a9cc9390461665c29b55c692090.jpg",
-      name: "Brand 5",
+      name: "Brand 6",
     },
   ];
 
