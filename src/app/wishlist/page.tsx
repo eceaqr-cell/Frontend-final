@@ -62,6 +62,7 @@ export default function WishlistPage() {
     if (wishlistIds.size > 0) {
       fetchWishlistProducts();
     } else {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setProducts([]);
       setLoading(false);
     }
