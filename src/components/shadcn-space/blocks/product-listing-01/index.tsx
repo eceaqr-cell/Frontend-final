@@ -1,11 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { ArrowRight, Loader2 } from "lucide-react";
 import {
   ProductCard,
   type ProductCardProps,
 } from "@/components/shadcn-space/blocks/product-listing-01/product-card";
+import { useCart } from "@/context/cart-context";
+import { useWishlist } from "@/context/wishlist-context";
 
 const API_BASE = "https://ishop.cheat.casa";
 const PRODUCTS_TO_SHOW = 8;
@@ -66,6 +69,8 @@ function mapApiProduct(item: any): ProductCardProps {
     : undefined;
 
   return {
+    id: item.uuid,
+    href: `/productdetail/${item.uuid}`,
     image: item.thumbnail || item.filteredImage || item.images?.[0] || "",
     category: item.category?.name ?? item.brand?.name ?? "General",
     name: item.name,
@@ -84,6 +89,8 @@ export interface ProductListingProps {
 export default function ProductListing({ products }: ProductListingProps) {
   const [items, setItems] = useState<ProductCardProps[]>(products ?? PRODUCTS);
   const [loading, setLoading] = useState(!products);
+  const { cartIds, addToCart } = useCart();
+  const { isWishlisted, toggleWishlist } = useWishlist();
 
   useEffect(() => {
     if (products) return;
@@ -121,13 +128,13 @@ export default function ProductListing({ products }: ProductListingProps) {
               Handpicked by our team
             </p>
           </div>
-          <a
-            href="#"
+          <Link
+            href="/products"
             className="items-center gap-2 text-sm font-medium flex group cursor-pointer"
           >
             See all
             <ArrowRight className="size-4 group-hover:translate-x-1 transition-all" />
-          </a>
+          </Link>
         </div>
 
         {loading ? (
@@ -138,14 +145,24 @@ export default function ProductListing({ products }: ProductListingProps) {
         ) : (
           <div className="w-full overflow-x-auto xl:[scrollbar-width:none] xl:[-ms-overflow-style:none] xl:[&::-webkit-scrollbar]:hidden">
             <div className="flex gap-6">
-              {items.map((product, index) => (
-                <div
-                  key={index}
-                  className="inline-block min-w-67.5 max-w-67.5 w-full whitespace-normal shrink-0"
-                >
-                  <ProductCard {...product} className="w-full" />
-                </div>
-              ))}
+              {items.map((product, index) => {
+                const id = product.id;
+                return (
+                  <div
+                    key={id ?? index}
+                    className="inline-block min-w-67.5 max-w-67.5 w-full whitespace-normal shrink-0"
+                  >
+                    <ProductCard
+                      {...product}
+                      className="w-full"
+                      isWishlisted={id ? isWishlisted(id) : false}
+                      inCart={id ? cartIds.has(id) : false}
+                      onWishlist={id ? () => toggleWishlist(id) : undefined}
+                      onAddToCart={id ? () => addToCart(id) : undefined}
+                    />
+                  </div>
+                );
+              })}
             </div>
           </div>
         )}

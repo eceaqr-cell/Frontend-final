@@ -1,13 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { Heart, Star } from "lucide-react";
+import Link from "next/link";
+import { Heart, Star, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 export interface ProductCardProps {
+  id?: string;
+  href?: string;
   image: string;
   category: string;
   name: string;
@@ -19,11 +21,14 @@ export interface ProductCardProps {
     text: string;
   };
   className?: string;
+  isWishlisted?: boolean;
+  inCart?: boolean;
   onAddToCart?: () => void;
   onWishlist?: () => void;
 }
 
 export function ProductCard({
+  href = "#",
   image,
   category,
   name,
@@ -33,11 +38,11 @@ export function ProductCard({
   originalPrice,
   badge,
   className,
+  isWishlisted = false,
+  inCart = false,
   onAddToCart,
   onWishlist,
 }: ProductCardProps) {
-  const [isWishlisted, setIsWishlisted] = useState(false);
-
   const getBadgeStyles = (text: string) => {
     const lowercaseText = text.toLowerCase();
     if (lowercaseText.includes("%") || lowercaseText === "sale") {
@@ -69,10 +74,7 @@ export function ProductCard({
         <Button
           size="icon-sm"
           className="group/wishlist absolute right-4 top-4 z-10 size-8 rounded-full bg-background transition-transform hover:scale-110 cursor-pointer"
-          onClick={() => {
-            setIsWishlisted(!isWishlisted);
-            onWishlist?.();
-          }}
+          onClick={onWishlist}
         >
           <Heart
             className={cn(
@@ -84,14 +86,16 @@ export function ProductCard({
           />
           <span className="sr-only">Add to wishlist</span>
         </Button>
-        <img
-          src={image}
-          alt={name}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-        />
+        <Link href={href}>
+          <img
+            src={image}
+            alt={name}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          />
+        </Link>
       </div>
       <CardContent className="flex flex-col gap-3 p-5">
-        <div className="flex flex-col gap-2">
+        <Link href={href} className="flex flex-col gap-2">
           <span className="text-sm text-muted-foreground capitalize">
             {category}
           </span>
@@ -125,12 +129,20 @@ export function ProductCard({
               </small>
             )}
           </div>
-        </div>
+        </Link>
         <Button
+          variant={inCart ? "outline" : "default"}
           className="w-full gap-2 h-10 cursor-pointer hover:bg-primary/80"
           onClick={onAddToCart}
         >
-          Add to Cart
+          {inCart ? (
+            <>
+              <Check className="size-4" />
+              Added
+            </>
+          ) : (
+            "Add to Cart"
+          )}
         </Button>
       </CardContent>
     </Card>

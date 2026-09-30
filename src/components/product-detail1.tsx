@@ -10,13 +10,6 @@ import { cn } from "cn";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useCart } from "@/context/cart-context";
 
@@ -185,38 +178,47 @@ const ProductDetail1 = ({ className, productId }: ProductDetail1Props) => {
   );
 };
 
+// Simple image gallery — main image + thumbnail row, no external carousel library needed
 const ProductImages = ({ images }: ProductImagesProps) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeImage = images[activeIndex] || images[0];
+
   return (
-    <Carousel
-      opts={{
-        breakpoints: {
-          "(min-width: 768px)": {
-            active: false,
-          },
-        },
-      }}
-    >
-      <CarouselContent className="gap-4 md:m-0 md:grid md:grid-cols-3 xl:gap-5">
-        {images.map((src, index) => (
-          <CarouselItem
-            className="first:col-span-3 md:p-0"
-            key={`product-detail-1-image-${index}`}
-          >
-            <AspectRatio ratio={1} className="overflow-hidden rounded-lg">
-              <img
-                src={src}
-                alt=""
-                className="block size-full object-cover object-center"
-              />
-            </AspectRatio>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <div className="md:hidden">
-        <CarouselPrevious className="left-4" />
-        <CarouselNext className="right-4" />
-      </div>
-    </Carousel>
+    <div className="flex flex-col gap-4">
+      <AspectRatio ratio={1} className="overflow-hidden rounded-lg bg-muted">
+        <img
+          src={activeImage}
+          alt=""
+          className="block size-full object-cover object-center"
+        />
+      </AspectRatio>
+
+      {images.length > 1 && (
+        <div className="grid grid-cols-4 gap-3">
+          {images.map((src, index) => (
+            <button
+              key={`product-detail-1-thumb-${index}`}
+              type="button"
+              onClick={() => setActiveIndex(index)}
+              className={cn(
+                "overflow-hidden rounded-lg border-2 transition-colors",
+                activeIndex === index
+                  ? "border-primary"
+                  : "border-transparent hover:border-border",
+              )}
+            >
+              <AspectRatio ratio={1}>
+                <img
+                  src={src}
+                  alt=""
+                  className="block size-full object-cover object-center"
+                />
+              </AspectRatio>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
   );
 };
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 import { Heart, ShoppingCart, TrendingDown, Loader2, Check, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn } from "cn";
@@ -153,20 +154,22 @@ const Wishlist1 = ({ className }: Wishlist1Props) => {
                 return (
                   <Card key={item.id} className="group gap-0 overflow-hidden p-0">
                     <div className="relative">
-                      <AspectRatio ratio={1} className="bg-muted">
-                        <img
-                          src={item.image || FALLBACK_IMAGE}
-                          alt={item.name}
-                          onError={(e) => {
-                            e.currentTarget.onerror = null;
-                            e.currentTarget.src = FALLBACK_IMAGE;
-                          }}
-                          className={cn(
-                            "size-full object-contain p-6",
-                            !item.inStock && "opacity-50",
-                          )}
-                        />
-                      </AspectRatio>
+                      <Link href={`/productdetail/${item.id}`}>
+                        <AspectRatio ratio={1} className="bg-muted">
+                          <img
+                            src={item.image || FALLBACK_IMAGE}
+                            alt={item.name}
+                            onError={(e) => {
+                              e.currentTarget.onerror = null;
+                              e.currentTarget.src = FALLBACK_IMAGE;
+                            }}
+                            className={cn(
+                              "size-full object-contain p-6",
+                              !item.inStock && "opacity-50",
+                            )}
+                          />
+                        </AspectRatio>
+                      </Link>
 
                       <div className="absolute top-3 left-3 flex flex-col gap-2">
                         {item.priceDrop && (
@@ -196,9 +199,11 @@ const Wishlist1 = ({ className }: Wishlist1Props) => {
                     </div>
 
                     <CardContent className="p-4">
-                      <h3 className="line-clamp-2 leading-tight font-medium">
-                        {item.name}
-                      </h3>
+                      <Link href={`/productdetail/${item.id}`}>
+                        <h3 className="line-clamp-2 leading-tight font-medium hover:underline">
+                          {item.name}
+                        </h3>
+                      </Link>
                       <div className="mt-2 flex items-center gap-2">
                         <span className="text-lg font-semibold">
                           {formatPrice(item.price)}
