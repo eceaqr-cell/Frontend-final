@@ -30,7 +30,7 @@ export default function Home() {
 
     <div className="container mx-auto">
 
-      <Wishlist1/>
+    
 
       <HeroSection avatarList={avatarList} />
       <BrandList brandList={brandList} />
