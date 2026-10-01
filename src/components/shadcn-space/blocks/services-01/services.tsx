@@ -143,7 +143,7 @@ const Categories = () => {
             </div>
 
             {/* Why Choose Us — ប្រើ container style ដដែល (bg-gray-950 rounded-2xl border) */}
-            <div className="bg-gray-950 border rounded-2xl p-8 sm:p-10 flex flex-col gap-8 w-full animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-200 ease-in-out fill-mode-both">
+            <div className="bg-blue-300  border rounded-2xl p-8 sm:p-10 flex flex-col gap-8 w-full animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-200 ease-in-out fill-mode-both">
               <p className="text-2xl font-medium text-white text-center">
                 Why Choose Nexus E-Com?
               </p>

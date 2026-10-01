@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Logo from "@/assets/logo/logo";
 import { Separator } from "@/components/ui/separator";
 
@@ -199,9 +200,27 @@ const Footer = () => {
             </div>
           </div>
           <Separator orientation="horizontal" />
-          <p className="text-sm font-normal text-muted-foreground text-center animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-100 ease-in-out fill-mode-both">
-            ©2026 NEXUS. All Rights Reserved
-          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-sm font-normal text-muted-foreground text-center sm:text-left animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-100 ease-in-out fill-mode-both">
+              ©2026 NEXUS. All Rights Reserved
+            </p>
+
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-muted-foreground">
+                Developed by a student at
+              </span>
+              <Image
+                src="/istad-logo.png"
+                alt="ISTAD - Institute of Science and Technology Advanced Development"
+                width={28}
+                height={28}
+                className="rounded-full"
+              />
+              <span className="text-xs font-bold text-foreground  text-red-500 no-underline hover:underline  ">
+                <a href="https://www.istad.co/">ISTAD</a>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
