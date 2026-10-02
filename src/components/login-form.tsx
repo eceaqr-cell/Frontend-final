@@ -94,6 +94,7 @@ export function LoginForm({
                       Forgot your password?
                     </Link>
                   </div>
+                  //for login
                   <Input
                     id="password"
                     type="password"
