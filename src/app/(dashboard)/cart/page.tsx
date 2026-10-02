@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 const API_BASE = "https://ishop.cheat.casa";
 const FALLBACK_IMAGE = "https://placehold.co/400x400/f1f5f9/94a3b8?text=No+Image";
-
+//  for page
 interface ProductItem {
   id: string;
   name: string;

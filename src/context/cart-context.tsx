@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 
 type CartContextType = {
   cartCount: number;
-  cartIds: Set<string>; // បន្ថែម cartIds ទីនេះ
+  cartIds: Set<string>; 
   addToCart: (id: string) => void;
   removeFromCart: (id: string) => void;
 };
