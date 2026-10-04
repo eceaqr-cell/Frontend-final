@@ -1,9 +1,16 @@
-import { Wishlist1 } from '@/components/wishlist1'
-import React from 'react'
+import { Suspense } from "react";
+import { Wishlist1 } from "@/components/wishlist1";
 
 export default function ProductdetailPage() {
   return (
-    <Wishlist1/>
-  )
+    <Suspense
+      fallback={
+        <div className="py-24 text-center">
+          Loading products...
+        </div>
+      }
+    >
+      <Wishlist1 />
+    </Suspense>
+  );
 }
-
