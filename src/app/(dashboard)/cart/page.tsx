@@ -16,48 +16,68 @@ interface ProductItem {
   price: number;
 }
 
+interface ApiProduct {
+  uuid: string;
+  name: string;
+  thumbnail?: string | null;
+  filteredImage?: string | null;
+  images?: string[];
+  priceOut: number;
+}
+
 export default function CartPage() {
   const { cartIds, removeFromCart } = useCart();
   const [cartProducts, setCartProducts] = useState<ProductItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (cartIds.size === 0) return;
+
+    let cancelled = false;
+
     async function fetchCartItems() {
       try {
         setLoading(true);
         const response = await fetch(`${API_BASE}/api/v1/products?page=0&size=50`);
         const result = await response.json();
-        const allProducts = result?.content ?? [];
+        const allProducts: ApiProduct[] = Array.isArray(result?.content)
+          ? result.content
+          : [];
 
         const matchedItems = allProducts
-          .filter((item: any) => cartIds.has(item.uuid))
-          .map((item: any) => ({
+          .filter((item) => cartIds.has(item.uuid))
+          .map((item) => ({
             id: item.uuid,
             name: item.name,
             image: item.thumbnail || item.filteredImage || item.images?.[0] || "",
             price: item.priceOut,
           }));
 
-        setCartProducts(matchedItems);
+        if (!cancelled) setCartProducts(matchedItems);
       } catch (error) {
         console.error("Error fetching cart products:", error);
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     }
 
-    if (cartIds.size > 0) {
-      fetchCartItems();
-    } else {
-      setCartProducts([]);
-      setLoading(false);
-    }
+    fetchCartItems();
+
+    return () => {
+      cancelled = true;
+    };
   }, [cartIds]);
+
+  const visibleCartProducts =
+    cartIds.size === 0
+      ? []
+      : cartProducts.filter((product) => cartIds.has(product.id));
+  const isLoading = cartIds.size > 0 && loading;
 
   const formatPrice = (price: number) =>
     new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(price);
 
-  const totalPrice = cartProducts.reduce((sum, item) => sum + item.price, 0);
+  const totalPrice = visibleCartProducts.reduce((sum, item) => sum + item.price, 0);
 
   return (
     <div className="container mx-auto max-w-5xl px-4 py-12">
@@ -72,13 +92,13 @@ export default function CartPage() {
         </Link>
       </div>
 
-      {loading ? (
+      {isLoading ? (
         <div className="py-20 text-center text-muted-foreground">Loading cart items...</div>
-      ) : cartProducts.length > 0 ? (
+      ) : visibleCartProducts.length > 0 ? (
         <div className="grid gap-8 md:grid-cols-3">
           {/* បញ្ជីទំនិញក្នុងកន្ត្រក */}
           <div className="space-y-4 md:col-span-2">
-            {cartProducts.map((item) => (
+            {visibleCartProducts.map((item) => (
               <div
                 key={item.id}
                 className="flex items-center justify-between gap-4 rounded-lg border p-4 shadow-sm bg-card"

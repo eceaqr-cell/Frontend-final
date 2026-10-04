@@ -29,6 +29,10 @@ export default function WishlistPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (wishlistIds.size === 0) return;
+
+    let cancelled = false;
+
     async function fetchWishlistProducts() {
       setLoading(true);
       try {
@@ -51,21 +55,28 @@ export default function WishlistPage() {
             }
           }),
         );
-        setProducts(results.filter((p): p is ProductItem => p !== null));
+        if (!cancelled) {
+          setProducts(results.filter((p): p is ProductItem => p !== null));
+        }
       } catch (error) {
         console.error("Error fetching wishlist products:", error);
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     }
 
-    if (wishlistIds.size > 0) {
-      fetchWishlistProducts();
-    } else {
-      setProducts([]);
-      setLoading(false);
-    }
+    fetchWishlistProducts();
+
+    return () => {
+      cancelled = true;
+    };
   }, [wishlistIds]);
+
+  const visibleProducts =
+    wishlistIds.size === 0
+      ? []
+      : products.filter((product) => wishlistIds.has(product.id));
+  const isLoading = wishlistIds.size > 0 && loading;
 
   const formatPrice = (price: number) =>
     new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(price);
@@ -78,18 +89,18 @@ export default function WishlistPage() {
             My Wishlist
           </h1>
           <p className="mt-1 text-muted-foreground">
-            {products.length} {products.length === 1 ? "item" : "items"} saved
+            {visibleProducts.length} {visibleProducts.length === 1 ? "item" : "items"} saved
           </p>
         </div>
 
-        {loading ? (
+        {isLoading ? (
           <div className="flex flex-col items-center justify-center py-24 text-muted-foreground">
             <Loader2 className="mb-3 size-6 animate-spin" />
             <p>Loading your wishlist...</p>
           </div>
-        ) : products.length > 0 ? (
+        ) : visibleProducts.length > 0 ? (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {products.map((item) => {
+            {visibleProducts.map((item) => {
               const inCart = cartIds.has(item.id);
               return (
                 <Card key={item.id} className="group gap-0 overflow-hidden p-0">

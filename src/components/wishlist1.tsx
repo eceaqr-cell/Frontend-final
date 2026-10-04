@@ -24,6 +24,18 @@ interface ProductItem {
   priceDrop?: boolean;
 }
 
+interface ApiProduct {
+  uuid: string;
+  name: string;
+  thumbnail?: string | null;
+  filteredImage?: string | null;
+  images?: string[];
+  priceOut: number;
+  discount?: number | null;
+  availability?: boolean | null;
+  stockQuantity?: number | null;
+}
+
 interface Wishlist1Props {
   className?: string;
 }
@@ -40,10 +52,11 @@ function shouldShowDiscountBadge(uuid: string): boolean {
   return hash < 30;
 }
 
-function mapApiProduct(item: any): ProductItem {
-  const hasRealDiscount = item.discount && item.discount > 0;
+function mapApiProduct(item: ApiProduct): ProductItem {
+  const discount = item.discount ?? 0;
+  const hasRealDiscount = discount > 0;
   const showBadge = hasRealDiscount && shouldShowDiscountBadge(item.uuid);
-  const discountFraction = hasRealDiscount ? item.discount / 100 : 0;
+  const discountFraction = hasRealDiscount ? discount / 100 : 0;
   const originalPrice = hasRealDiscount
     ? Math.round((item.priceOut / (1 - discountFraction)) * 100) / 100
     : undefined;
@@ -54,7 +67,7 @@ function mapApiProduct(item: any): ProductItem {
     image: item.thumbnail || item.filteredImage || item.images?.[0] || "",
     price: item.priceOut,
     originalPrice: showBadge ? originalPrice : undefined,
-    inStock: item.availability ?? item.stockQuantity > 0,
+    inStock: item.availability ?? (item.stockQuantity ?? 0) > 0,
     priceDrop: showBadge,
   };
 }
@@ -125,7 +138,7 @@ const Wishlist1 = ({ className }: Wishlist1Props) => {
     new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(price);
 
   return (
-    <section className={cn("py-16 md:py-24", className)}>
+    <section className={cn("theme-page bg-background py-16 text-foreground md:py-24", className)}>
       <div className="container mx-auto max-w-7xl">
         <div className="mb-8 flex justify-center">
           <div className="relative w-full max-w-md">

@@ -2,7 +2,7 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { motion } from "motion/react";
+import { motion, type Variants } from "motion/react";
 import { cn } from "@/lib/utils";
 import {
   LucideIcon,
@@ -78,7 +78,7 @@ const featureData: FeatureData[] = [
 ];
 
 const Categories = () => {
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { opacity: 0, y: 80 },
     visible: (index: number) => ({
       opacity: 1,
@@ -98,7 +98,7 @@ const Categories = () => {
             </Badge>
             <div className="max-w-3xs sm:max-w-lg mx-auto text-center">
               <h2 className="text-foreground text-3xl sm:text-5xl font-medium">
-                Find what you're looking for
+                Find what you&apos;re looking for
               </h2>
             </div>
           </div>

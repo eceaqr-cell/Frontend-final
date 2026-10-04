@@ -3,7 +3,6 @@ import type { NavigationSection } from "@/components/shadcn-space/blocks/hero-01
 import Header from "@/components/shadcn-space/blocks/hero-01/header";
 import BrandSlider, { BrandList } from "@/components/shadcn-space/blocks/hero-01/brand-slider";
 import type { AvatarList } from "@/components/shadcn-space/blocks/hero-01/hero";
-import Link from "next/link";
 
 export default function Navbar() {
   const avatarList: AvatarList[] = [
@@ -25,7 +24,6 @@ export default function Navbar() {
     {
       title: "Home",
       href: "#",
-      isActive: true,
     },
     {
       title: "About us",

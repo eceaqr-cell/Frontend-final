@@ -5,6 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import Header from "@/components/shadcn-space/blocks/hero-01/header";
 import Footer from "@/components/shadcn-space/blocks/footer-01/footer";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const navigationData = [
   { title: "Home", href: "/" },
@@ -26,7 +27,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
   return (
     <>
       {hideFullNav && (
-        <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b px-4 py-3">
+        <div className="sticky top-0 z-50 flex items-center justify-between bg-background/80 backdrop-blur-sm border-b px-4 py-3">
           <Button
             variant="ghost"
             size="sm"
@@ -36,6 +37,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
             <ArrowLeft className="size-4" />
             Back
           </Button>
+          <ThemeToggle />
         </div>
       )}
 

@@ -1,8 +1,5 @@
 
 
-import { Wishlist1 } from "@/components/wishlist1";
-import { div } from "motion/react-client";
-import Image from "next/image";
 import HeroSection from "@/components/shadcn-space/blocks/hero-01/hero";
 import BrandList from "@/components/shadcn-space/blocks/hero-01/brand-slider";
 import ProductListing from "@/components/shadcn-space/blocks/product-listing-01";
