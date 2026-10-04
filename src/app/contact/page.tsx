@@ -1,7 +1,6 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import Link from "next/link";
 
 type Service = {
   icon: string;
@@ -124,7 +123,7 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="min-h-screen bg-white text-[#171717]">
+    <main className="theme-page min-h-screen bg-white text-[#171717] dark:bg-background dark:text-foreground">
 
       {/* =====================================================
           CONTACT SECTION
@@ -230,26 +229,6 @@ export default function ContactPage() {
                 />
               </div>
 
-              {/* Employees */}
-              <div className="mt-4">
-                <div className="mb-2 flex justify-between">
-                  <label className="text-[11px] font-semibold">
-                    Number of employees
-                  </label>
-
-                  <span className="text-[11px] font-semibold text-blue-600">
-                    10
-                  </span>
-                </div>
-
-                <input
-                  type="range"
-                  min="1"
-                  max="100"
-                  defaultValue="10"
-                  className="w-full accent-blue-600"
-                />
-              </div>
 
               {/* Phone */}
               <div className="mt-4">
@@ -613,33 +592,3 @@ export default function ContactPage() {
   );
 }
 
-/* =========================================================
-   FOOTER COLUMN
-========================================================= */
-
-function FooterColumn({
-  title,
-  links,
-}: {
-  title: string;
-  links: string[];
-}) {
-  return (
-    <div>
-      <h4 className="text-[11px] font-bold text-gray-900">{title}</h4>
-
-      <ul className="mt-4 space-y-2.5">
-        {links.map((link) => (
-          <li key={link}>
-            <a
-              href="#"
-              className="text-[10px] text-gray-500 transition hover:text-blue-600"
-            >
-              {link}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}

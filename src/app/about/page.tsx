@@ -1,11 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import Link from 'next/link';
 
 import {
-  Search, ArrowUpRight, Menu, X, Zap, ShieldCheck,
-  Cpu, Flame, ChevronDown, Laptop, Battery, HardDrive,
+  Menu, X, Zap, ShieldCheck,
+  Cpu, Flame, ChevronDown, Battery, HardDrive,
   Users, GraduationCap, Star, Sparkles
 } from 'lucide-react';
 
@@ -17,7 +16,6 @@ export default function AboutPage() {
   const [modalOpen, setModalOpen] = useState(false);
 
   // FAQ Accordion states
-  const [faqTab, setFaqTab] = useState('general');
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   const instructor = {
@@ -66,7 +64,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#fcfdfd] text-slate-900 font-sans antialiased">
+    <div className="theme-page min-h-screen flex flex-col bg-[#fcfdfd] text-slate-900 font-sans antialiased dark:bg-background dark:text-foreground">
 
       {/* 1. NAVBAR SECTION */}
       <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-100">
@@ -269,7 +267,7 @@ export default function AboutPage() {
           </div>
 
           {/* Dedicated Instructor Card */}
-          <div className="max-w-3xl mx-auto mb-16 bg-gradient-to-br from-white via-teal-50/40 to-slate-50 rounded-3xl p-6 sm:p-8 border-2 border-teal-500/30 shadow-xl relative overflow-hidden">
+          <div className="max-w-3xl mx-auto mb-16 bg-gradient-to-br from-white via-teal-50/40 to-slate-50 dark:from-card dark:via-teal-950/30 dark:to-muted rounded-3xl p-6 sm:p-8 border-2 border-teal-500/30 shadow-xl relative overflow-hidden">
             <div className="absolute -right-12 -bottom-12 w-48 h-48 bg-teal-500/10 rounded-full blur-2xl pointer-events-none"></div>
 
             <div className="flex flex-col md:flex-row items-center gap-6 sm:gap-8 relative z-10">
@@ -305,8 +303,6 @@ export default function AboutPage() {
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium pt-1">
                   &quot;{instructor.bio}&quot;
                 </p>
-
-                {/* Skill / Value Pills */}
                 <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 pt-2">
                   {instructor.tags.map((tag, i) => (
                     <span key={i} className="text-[10px] font-semibold text-slate-600 bg-white border border-slate-200 px-2.5 py-1 rounded-full shadow-xs flex items-center gap-1">
@@ -350,23 +346,6 @@ export default function AboutPage() {
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-slate-900">Frequently Asked Question</h2>
           <p className="text-xs text-slate-500 mt-2">Clear answers to common questions about our platform, features, and support.</p>
-        </div>
-
-        {/* Category Tabs */}
-        <div className="flex justify-center gap-2 mb-8 text-xs font-semibold">
-          {['general', 'platform', 'features', 'support'].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setFaqTab(tab)}
-              className={`px-4 py-1.5 rounded-full capitalize transition ${
-                faqTab === tab
-                  ? 'bg-slate-200 text-slate-900 font-bold'
-                  : 'text-slate-500 hover:text-slate-800'
-              }`}
-            >
-              {tab}
-            </button>
-          ))}
         </div>
 
         {/* Accordion */}

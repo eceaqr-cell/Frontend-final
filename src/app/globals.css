@@ -128,3 +128,43 @@
     @apply font-sans;
   }
 }
+
+@layer utilities {
+  .dark .theme-page [class*="bg-white"] {
+    background-color: var(--card);
+  }
+
+  .dark .theme-page [class*="bg-slate-50"],
+  .dark .theme-page [class*="bg-gray-50"] {
+    background-color: var(--muted);
+  }
+
+  .dark .theme-page [class*="text-slate-900"],
+  .dark .theme-page [class*="text-slate-800"],
+  .dark .theme-page [class*="text-gray-900"],
+  .dark .theme-page [class*="text-gray-700"] {
+    color: var(--foreground);
+  }
+
+  .dark .theme-page [class*="text-slate-700"],
+  .dark .theme-page [class*="text-slate-600"],
+  .dark .theme-page [class*="text-slate-500"],
+  .dark .theme-page [class*="text-slate-400"],
+  .dark .theme-page [class*="text-gray-600"],
+  .dark .theme-page [class*="text-gray-500"],
+  .dark .theme-page [class*="text-gray-400"] {
+    color: var(--muted-foreground);
+  }
+
+  .dark .theme-page [class*="border-slate-"],
+  .dark .theme-page [class*="border-gray-"] {
+    border-color: var(--border);
+  }
+
+  .dark .theme-page input,
+  .dark .theme-page select,
+  .dark .theme-page textarea {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+}

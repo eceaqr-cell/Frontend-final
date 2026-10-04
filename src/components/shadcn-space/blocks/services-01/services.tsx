@@ -102,7 +102,7 @@ const Categories = () => {
             </Badge>
             <div className="max-w-3xs sm:max-w-lg mx-auto text-center">
               <h2 className="text-foreground text-3xl sm:text-5xl font-medium">
-                Find what you're looking for
+                Find what you&apos;re looking for
               </h2>
             </div>
           </div>

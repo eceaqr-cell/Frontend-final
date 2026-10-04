@@ -16,6 +16,7 @@ import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useCart } from "@/context/cart-context";
 import { useWishlist } from "@/context/wishlist-context";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export type NavigationSection = {
   title: string;
@@ -158,6 +159,7 @@ const Header = ({ navigationData, className }: HeaderProps) => {
 
         {/* Desktop CTA */}
         <div className="flex gap-3 items-center">
+          <ThemeToggle className="hidden lg:inline-flex" />
           <LoginButton className="hidden lg:flex" />
 
           <Link href="/wishlist" className="relative hidden lg:block">
@@ -199,9 +201,10 @@ const Header = ({ navigationData, className }: HeaderProps) => {
                 className="w-full sm:w-96 p-0 border-l-0"
               >
                 <div className="flex items-center justify-between p-6">
-                  <a href="/">
+                  <Link href="/">
                     <Logo className="gap-2" />
-                  </a>
+                  </Link>
+                  <ThemeToggle className="ml-auto" />
                   <SheetClose id="mobile-menu-close">
                     <span className="rounded-full border border-border p-2.5 block">
                       <X width={16} height={16} />

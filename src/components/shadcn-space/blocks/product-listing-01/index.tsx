@@ -13,6 +13,18 @@ import { useWishlist } from "@/context/wishlist-context";
 const API_BASE = "https://ishop.cheat.casa";
 const PRODUCTS_TO_SHOW = 8;
 
+interface ApiProduct {
+  uuid: string;
+  name: string;
+  thumbnail?: string | null;
+  filteredImage?: string | null;
+  images?: string[];
+  priceOut: number;
+  discount?: number | null;
+  category?: { name?: string | null } | null;
+  brand?: { name?: string | null } | null;
+}
+
 // Fallback data — used if the API fails or before data loads
 export const PRODUCTS: ProductCardProps[] = [
   {
@@ -61,9 +73,10 @@ export const PRODUCTS: ProductCardProps[] = [
 ];
 
 // Maps a raw API product into the shape ProductCard expects
-function mapApiProduct(item: any): ProductCardProps {
-  const hasDiscount = item.discount && item.discount > 0;
-  const discountFraction = hasDiscount ? item.discount / 100 : 0;
+function mapApiProduct(item: ApiProduct): ProductCardProps {
+  const discount = item.discount ?? 0;
+  const hasDiscount = discount > 0;
+  const discountFraction = hasDiscount ? discount / 100 : 0;
   const originalPrice = hasDiscount
     ? Math.round((item.priceOut / (1 - discountFraction)) * 100) / 100
     : undefined;
@@ -78,7 +91,7 @@ function mapApiProduct(item: any): ProductCardProps {
     reviews: 100,
     price: item.priceOut,
     originalPrice,
-    badge: hasDiscount ? { text: `-${item.discount}%` } : undefined,
+    badge: hasDiscount ? { text: `-${discount}%` } : undefined,
   };
 }
 
