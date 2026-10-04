@@ -1,0 +1,1 @@
+import{t as e}from"./framework~index~page~page~layout~page~page~page~page~page~page~seed-cache~metadata-route-re~hd4512x6-DXlhZOMn.js";import{t}from"./services-IdiQUHph.js";var n=e(),r=()=>(0,n.jsx)(t,{});export{r as default};

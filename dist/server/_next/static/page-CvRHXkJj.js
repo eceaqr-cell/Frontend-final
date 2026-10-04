@@ -1,0 +1,1 @@
+import{t as e}from"./framework~index~page~page~layout~page~page~page~page~page~page~seed-cache~metadata-route-re~hd4512x6-DXlhZOMn.js";import{t}from"./product-listing-01-CkeWdncm.js";var n=e();function r(){return(0,n.jsx)(t,{})}export{r as default};

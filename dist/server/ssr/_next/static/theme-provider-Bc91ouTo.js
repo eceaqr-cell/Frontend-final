@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-CWmDy9ap.js";import{t}from"./dist-BNIgwWKa.js";var n=e();function r({children:e}){return(0,n.jsx)(t,{attribute:`class`,defaultTheme:`system`,enableSystem:!0,disableTransitionOnChange:!0,children:e})}export{r as ThemeProvider};

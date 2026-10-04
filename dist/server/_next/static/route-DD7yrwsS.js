@@ -1,0 +1,1 @@
+import{n as e}from"./server-C2mG-HdD.js";async function t(t){let{email:n,password:r}=await t.json();if(n!==`chheannyc@gmail.com`||r!==`123456`)return e.json({message:`Incorrect email or password`},{status:401});let i=e.json({ok:!0});return i.cookies.set(`session`,`demo-session-token`,{httpOnly:!0,sameSite:`lax`,path:`/`,maxAge:604800}),i}export{t as POST};

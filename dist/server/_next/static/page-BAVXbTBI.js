@@ -1,0 +1,1 @@
+import{t as e}from"./server-BMbJc6Rk.js";import{t}from"./framework~index~page~page~layout~page~page~page~page~page~page~seed-cache~metadata-route-re~hd4512x6-DXlhZOMn.js";var n=e(()=>{throw Error(`Unexpectedly client reference export 'default' is called on server`)},`321a90905bbf`,`default`),r=t();function i(){return(0,r.jsx)(n,{})}export{i as default};

@@ -1,0 +1,12 @@
+[
+  "class-variance-authority",
+  "cn",
+  "@floating-ui/utils",
+  "@floating-ui/dom",
+  "ipaddr.js",
+  "@unpic/core",
+  "@hookform/resolvers",
+  "zod",
+  "motion-dom",
+  "motion-utils"
+]
