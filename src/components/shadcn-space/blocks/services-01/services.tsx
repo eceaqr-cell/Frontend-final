@@ -2,7 +2,7 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { motion } from "motion/react";
+import { motion, type Variants } from "motion/react";
 import { cn } from "@/lib/utils";
 import {
   LucideIcon,
@@ -78,12 +78,16 @@ const featureData: FeatureData[] = [
 ];
 
 const Categories = () => {
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { opacity: 0, y: 80 },
     visible: (index: number) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: index * 0.1, duration: 0.6, ease: "easeInOut" },
+      transition: {
+        delay: index * 0.1,
+        duration: 0.6,
+        ease: "easeInOut",
+      },
     }),
   };
 

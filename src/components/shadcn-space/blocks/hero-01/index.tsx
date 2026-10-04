@@ -25,7 +25,6 @@ export default function Navbar() {
     {
       title: "Home",
       href: "#",
-      isActive: true,
     },
     {
       title: "About us",
